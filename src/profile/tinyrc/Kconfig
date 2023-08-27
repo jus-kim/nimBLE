@@ -1,0 +1,25 @@
+#
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+#
+# Battery charger driver configuration options
+#
+
+menuconfig PROFILE_TINYRC
+	bool "OS profile for tinyRCr"
+	default y
+	depends on GPIO && PWM && I2C && MOTORS_DRV && LED_DRIVERS && LTC3220 && BAT_CHARGER && MCP73831
+	help
+	  Enable tinyRC OS profile.
+
+
+if PROFILE_TINYRC
+
+#config MCP73831
+#	bool "MCP73831 driver"
+#	default y
+#	depends on GPIO
+#	help
+#	  Enable MCP73831 battery charger driver.
+
+endif # PROFILE_TINYRC

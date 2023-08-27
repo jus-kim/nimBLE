@@ -1,0 +1,59 @@
+# Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+# SPDX-License-Identifier: Apache-2.0
+
+description: Motor controller parent node to be used with DRV8220 and A4988.
+
+compatible: "juskim,motors"
+
+child-binding:
+
+  description: Motor controller child node
+
+  properties:
+
+    pwms:
+      required: true
+      type: phandle-array
+
+    nsleep-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The !SLEEP signal
+
+    en-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The boost EN signal
+
+    dc-ph-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The DC PH signal
+
+    step-step-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The stepper STEP signal
+
+    step-dir-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The stepper DIR signal
+
+    step-nrst-gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The stepper !RST signal
+        
+    step-period-us:
+      type: int
+      required: true
+      description: |
+        The stepper motor period in microseconds
+      default: 250

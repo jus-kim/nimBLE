@@ -1,0 +1,13 @@
+# Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+# SPDX-License-Identifier: Apache-2.0
+
+identifier: nimble_dk
+name: nimBLE DK
+type: mcu
+arch: arm
+ram: 256
+flash: 1024
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools

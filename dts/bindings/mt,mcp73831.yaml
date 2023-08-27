@@ -1,0 +1,23 @@
+# Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+# SPDX-License-Identifier: Apache-2.0
+
+description: Microchip MCP73831 battery charger.
+
+compatible: "mt,mcp73831"
+
+include: []
+
+properties:
+
+  stat-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      The battery charger STAT signal
+
+  maxcharge-ma:
+    type: int
+    required: true
+    description: |
+      Maximum charge current in mA
+    default: 200

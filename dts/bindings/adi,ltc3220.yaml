@@ -1,0 +1,26 @@
+# Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+# SPDX-License-Identifier: Apache-2.0
+
+description: ADI LTC3220 LED drivers.
+
+compatible: "adi,ltc3220"
+
+include: [i2c-device.yaml]
+
+properties:
+
+  reg:
+    required: true
+
+  nrst-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      The LED drivers !RST signal
+
+  led-count:
+    type: int
+    required: true
+    description: |
+      Total number of LEDs
+    default: 18

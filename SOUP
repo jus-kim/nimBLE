@@ -1,0 +1,21 @@
+Software of Unknown Provenance (SOUP) List
+
+1) The Zephyr Project
+  - Author(s):       Linux Foundation, Wind River Systems
+  - Software system: Firmware and RTOS
+  - Package name:    Zephyr RTOS
+  - Version:         v3.3.99
+  - Website link:    https://github.com/zephyrproject-rtos/zephyr
+  - Last verified:   February 2023
+  - Risk level:      High
+  - Requirements:    ARM GCC
+
+2) Nordic Semiconductor nRF Connect Desktop & Toolchain Manager
+  - Author(s):       Nordic Semiconductor ASA
+  - Software system: Firmware and Toolchain
+  - Package name:    nRF Connect SDK
+  - Version:         v2.4.0
+  - Website link:    https://www.nordicsemi.com/Products/Development-software/nrf-connect-sdk
+  - Last verified:   July 2023
+  - Risk level:      High
+  - Requirements:    ARM GCC, nrfjprog, nRF52 SoC

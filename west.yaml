@@ -1,0 +1,14 @@
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+
+manifest:
+  remotes:
+    - name: ncs
+      url-base: https://github.com/nrfconnect
+
+  projects:
+    - name: nrf
+      remote: ncs
+      repo-path: sdk-nrf
+      revision: v2.4.0
+      import: true

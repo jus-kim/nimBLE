@@ -1,0 +1,184 @@
+// Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+// SPDX-License-Identifier: Apache-2.0
+
+/dts-v1/;
+#include <nordic/nrf52833_qiaa.dtsi>
+
+/ {
+	model = "nimBLE DK";
+	compatible = "juskim,nimble-dk";
+
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+		zephyr,shell-uart = &cdc_acm_uart0;
+		//zephyr,uart-mcumgr = &cdc_acm_uart0;
+		//zephyr,bt-mon-uart = &cdc_acm_uart0;
+		//zephyr,bt-c2h-uart = &cdc_acm_uart0;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+		nordic,uart0 = &uart0;
+	};
+
+	aliases {
+		motors0 = &motors0;
+		ltc3220 = &ltc3220;
+		mcp73831 = &mcp73831;
+	};
+
+	motors {
+		compatible = "juskim,motors";
+		
+		motors0: motors_0 {
+			pwms = <&pwm0 0 PWM_USEC(5000) PWM_POLARITY_NORMAL>; // DC motor EN pin
+			nsleep-gpios = <&gpio0 5 GPIO_PUSH_PULL>;
+			en-gpios = <&gpio0 31 GPIO_PUSH_PULL>;
+			dc-ph-gpios = <&gpio0 2 GPIO_PUSH_PULL>;
+			step-step-gpios = <&gpio0 11 GPIO_PUSH_PULL>;
+			step-dir-gpios = <&gpio0 4 GPIO_PUSH_PULL>;
+			step-nrst-gpios = <&gpio1 9 GPIO_PUSH_PULL>;
+			step-period-us = <250>;
+		};
+	};
+
+	mcp73831: mcp73831 {
+		compatible = "mt,mcp73831";
+		stat-gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
+		maxcharge-ma = <200>;
+	};
+};
+
+&adc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&uart0 {
+	compatible = "nordic,nrf-uarte";
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-1 = <&uart0_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&i2c0 {
+	compatible = "nordic,nrf-twim";
+	status = "okay";
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-1 = <&i2c0_sleep>;
+	pinctrl-names = "default", "sleep";
+	clock-frequency = <I2C_BITRATE_FAST>;
+
+	ltc3220: ltc3220@1c{
+		compatible = "adi,ltc3220";
+		reg = <0x1c>;
+		nrst-gpios = <&gpio0 20 GPIO_PUSH_PULL>;
+		led-count = <18>;
+	};
+};
+
+&pwm0 {
+	status = "okay";
+	pinctrl-0 = <&pwm0_default>;
+	pinctrl-1 = <&pwm0_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&flash0 {
+
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		boot_partition: partition@0 {
+			label = "mcuboot";
+			reg = <0x00000000 0xC000>;
+		};
+		slot0_partition: partition@c000 {
+			label = "image-0";
+			reg = <0x0000C000 0x37000>;
+		};
+		slot1_partition: partition@43000 {
+			label = "image-1";
+			reg = <0x00043000 0x37000>;
+		};
+		storage_partition: partition@7a000 {
+			label = "storage";
+			reg = <0x0007A000 0x00006000>;
+		};
+	};
+};
+
+zephyr_udc0: &usbd {
+	compatible = "nordic,nrf-usbd";
+	status = "okay";
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};
+
+&pinctrl {
+	uart0_default: uart0_default {
+		group1 {
+			psels = <NRF_PSEL(UART_TX, 0, 27)>,
+				<NRF_PSEL(UART_RTS, 0, 26)>;
+		};
+		group2 {
+			psels = <NRF_PSEL(UART_RX, 0, 25)>,
+				<NRF_PSEL(UART_CTS, 0, 24)>;
+			bias-pull-up;
+		};
+	};
+
+	uart0_sleep: uart0_sleep {
+		group1 {
+			psels = <NRF_PSEL(UART_TX, 0, 27)>,
+				<NRF_PSEL(UART_RX, 0, 25)>,
+				<NRF_PSEL(UART_RTS, 0, 26)>,
+				<NRF_PSEL(UART_CTS, 0, 24)>;
+			low-power-enable;
+		};
+	};
+
+	i2c0_default: i2c0_default {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 15)>,
+				<NRF_PSEL(TWIM_SCL, 0, 17)>;
+		};
+	};
+
+	i2c0_sleep: i2c0_sleep {
+		group1 {
+			psels = <NRF_PSEL(TWIM_SDA, 0, 15)>,
+				<NRF_PSEL(TWIM_SCL, 0, 17)>;
+			low-power-enable;
+		};
+	};
+
+	pwm0_default: pwm0_default {
+		group1 {
+			psels = <NRF_PSEL(PWM_OUT0, 0, 3)>;	// Channel 0
+			nordic,invert;
+		};
+	};
+
+	pwm0_sleep: pwm0_sleep {
+		group1 {
+			psels = <NRF_PSEL(PWM_OUT0, 0, 3)>;	// Channel 0
+			low-power-enable;
+		};
+	};
+};

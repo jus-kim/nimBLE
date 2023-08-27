@@ -1,0 +1,38 @@
+{
+  "nrf-connect.topdir": "${nrf-connect.sdk:2.4.0}",
+  "nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.4.0}",
+  "nrf-connect.boardRoots": [
+    "${workspaceFolder}"
+  ],
+  "files.associations": {
+    "kernel.h": "c",
+    "uart.h": "c",
+    "usb_device.h": "c",
+    "bluetooth.h": "c",
+    "uart_async_adapter.h": "c",
+    "log.h": "c",
+    "nus.h": "c",
+    "stdio.h": "c",
+    "gatt.h": "c",
+    "settings.h": "c",
+    "devicetree.h": "c",
+    "ble_lib.h": "c",
+    "uart_lib.h": "c",
+    "hci.h": "c",
+    "shell.h": "c",
+    "unistd.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "ctype.h": "c",
+    "types.h": "c",
+    "led_drivers.h": "c",
+    "shell_lib.h": "c",
+    "ltc3220.h": "c",
+    "soc_lib.h": "c",
+    "mcp73831.h": "c",
+    "util.h": "c",
+    "string.h": "c",
+    "tinyrc.h": "c"
+  }
+}

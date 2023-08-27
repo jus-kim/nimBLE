@@ -1,0 +1,24 @@
+#
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+#
+# LED drivers configuration options
+#
+
+menuconfig LED_DRIVERS
+	bool "LED drivers"
+	default y
+	help
+	  Enable LED drivers driver.
+
+
+if LED_DRIVERS
+
+config LTC3220
+	bool "LTC3220 LED drivers"
+	default y
+	depends on I2C && GPIO
+	help
+	  Enable LTC3220 LED drivers.
+
+endif # LED_DRIVERS

@@ -1,0 +1,24 @@
+#
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+#
+# DRV8220 and A4988 motors driver configuration options
+#
+
+menuconfig MOTORS_DRV
+	bool "Motors driver"
+	default y
+	help
+	  Enable motors driver for DRV8220 and A4988.
+
+
+if MOTORS_DRV
+
+#config DRV8220
+#	bool "DRV8220 DC motor"
+#	default y
+#	depends on PWM && GPIO
+#	help
+#	  Enable PWM-based driver for DRV8220 based motors driver.
+
+endif # MOTORS_DRV

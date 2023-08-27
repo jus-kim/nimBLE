@@ -1,0 +1,10 @@
+#
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+#
+
+menu "Drivers"
+rsource "bat_charger/Kconfig"
+rsource "led_drivers/Kconfig"
+rsource "motors/Kconfig"
+endmenu

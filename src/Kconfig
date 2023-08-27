@@ -1,0 +1,8 @@
+#
+# Copyright (c) 2023 juskim. All rights reserved.
+# GitHub: jus-kim, YouTube: @juskim
+#
+
+rsource "driver/Kconfig"
+rsource "lib/Kconfig"
+rsource "profile/Kconfig"

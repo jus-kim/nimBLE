@@ -1,0 +1,6 @@
+# Copyright (c) 2023 juskim (GitHub: jus-kim, YouTube: @juskim)
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_NIMBLE_DK
+	bool "nimBLE DK"
+	depends on SOC_NRF52833_QIAA
